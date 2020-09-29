@@ -1,0 +1,313 @@
+{
+  "type": "record",
+  "name": "ModularUPCEvent",
+  "namespace": "ModularUPCEvents.Resources",
+  "doc": "Model representing a Planogram UPC event",
+  "fields": [
+    {
+      "name": "MetaData",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "EventMetaData",
+          "fields": [
+            {
+              "name": "Source",
+              "type": [
+                "null",
+                {
+                  "type": "string",
+                  "avro.java.string": "String"
+                }
+              ],
+              "doc": "Identifies the source of the event.",
+              "default": null
+            },
+            {
+              "name": "MessageGeneratedTimestamp",
+              "type": [
+                "null",
+                "long"
+              ],
+              "doc": "The timestamp of the event occurrence; (in milliseconds since Unix epoch).",
+              "default": null,
+              "logicalType": "timestamp-millis"
+            }
+          ]
+        }
+      ],
+      "doc": "Message source and timestamp",
+      "default": null
+    },
+    {
+      "name": "CkbPlanogramId",
+      "type": "int",
+      "doc": "The Id of the Planogram in the CKB database"
+    },
+    {
+      "name": "LegacyModPlanId",
+      "type": "int",
+      "doc": "The Id of the Planogram from the legacy system"
+    },
+    {
+      "name": "PlanogramName",
+      "type": [
+        "null",
+        {
+          "type": "string",
+          "avro.java.string": "String"
+        }
+      ],
+      "doc": "The name of the Planogram",
+      "default": null
+    },
+    {
+      "name": "CountryCode",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "The Code for the Country of the Planogram"
+    },
+    {
+      "name": "InitialLoad",
+      "type": "boolean",
+      "doc": "Whether or not this event is part of an Initial Load of data",
+      "default": false
+    },
+    {
+      "name": "StoreNumber",
+      "type": "int",
+      "doc": "The store number of this Planogram"
+    },
+    {
+      "name": "Department",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "The Department of the Planogram (Padded to 2 digits)"
+    },
+    {
+      "name": "Category",
+      "type": {
+        "type": "string",
+        "avro.java.string": "String"
+      },
+      "doc": "The Category of the Planogram (Padded to 4 digits)"
+    },
+    {
+      "name": "EffectiveDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The effective date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
+      "name": "DiscontinueDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The discontinue date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
+      "name": "Multiplier",
+      "type": "int",
+      "doc": "The number of times modular is replicated on the store floorplan",
+      "default": 1
+    },
+    {
+      "name": "ModularSegments",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "ModularSegment",
+            "doc": "Model representing the modular segments of a Planogram",
+            "fields": [
+              {
+                "name": "SegmentNumber",
+                "type": [
+                  "null",
+                  "int"
+                ],
+                "doc": "Order number of the section on a modular",
+                "default": null
+              },
+              {
+                "name": "ROCFixtureType",
+                "type": [
+                  "null",
+                  {
+                    "type": "string",
+                    "avro.java.string": "String"
+                  }
+                ],
+                "doc": "ROC fixture type of the segment",
+                "default": null
+              }
+            ]
+          }
+        }
+      ],
+      "doc": "The segments of the modular",
+      "default": null
+    },
+    {
+      "name": "ItemSelectionDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
+      "name": "ItemDiscontinueDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
+      "name": "UPCs",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "ItemUPC",
+          "doc": "Model representing an item UPC on a Planogram",
+          "fields": [
+            {
+              "name": "UPC",
+              "type": {
+                "type": "string",
+                "avro.java.string": "String"
+              },
+              "doc": "The UPC of this item"
+            },
+            {
+              "name": "ResolvedUPC",
+              "type": [
+                "null",
+                {
+                  "type": "string",
+                  "avro.java.string": "String"
+                }
+              ],
+              "doc": "The store specific item UPC",
+              "default": null
+            },
+            {
+              "name": "LocationId",
+              "type": "int",
+              "doc": "The Location Id of the item"
+            },
+            {
+              "name": "SectionNumber",
+              "type": "int",
+              "doc": "The section of the item"
+            },
+            {
+              "name": "NewUPC",
+              "type": "boolean",
+              "doc": "Flag indicating whether this is a newly added item or an already existing item on this planogram"
+            },
+            {
+              "name": "ShelfCapacity",
+              "type": "int",
+              "doc": "Product capacity for a position",
+              "default": 0
+            },
+            {
+              "name": "MerchandiseStyleCode",
+              "type": "int",
+              "doc": "Merchandise style of the product, 0 = Unit, 1 = Tray, 2 = Case, 3 = Display 4 = Alternate, 5 = Loose, 6 = LogStack",
+              "default": 0
+            },
+            {
+              "name": "XFacings",
+              "type": "int",
+              "doc": "Number of horizontal facings",
+              "default": 0
+            },
+            {
+              "name": "YFacings",
+              "type": "int",
+              "doc": "Number of vertical facings",
+              "default": 0
+            },
+            {
+              "name": "ZFacings",
+              "type": "int",
+              "doc": "Number of depth facings",
+              "default": 0
+            },
+            {
+              "name": "XPosition",
+              "type": "double",
+              "doc": "X position of the product",
+              "default": 0
+            },
+            {
+              "name": "YPosition",
+              "type": "double",
+              "doc": "Y position of the product",
+              "default": 0
+            },
+            {
+              "name": "ZPosition",
+              "type": "double",
+              "doc": "Z position of the product",
+              "default": 0
+            },
+            {
+              "name": "FixtureId",
+              "type": "int",
+              "doc": "Fixture Id",
+              "default": 0
+            },
+            {
+              "name": "FixtureNotch",
+              "type": "int",
+              "doc": "Fixture notch position",
+              "default": 0
+            },
+            {
+              "name": "FixtureXPosition",
+              "type": "double",
+              "doc": "X position of the fixture",
+              "default": 0
+            },
+            {
+              "name": "FixtureYPosition",
+              "type": "double",
+              "doc": "Y position of the fixture",
+              "default": 0
+            },
+            {
+              "name": "FixtureZPosition",
+              "type": "double",
+              "doc": "Z position of the fixture",
+              "default": 0
+            }
+          ]
+        }
+      },
+      "doc": "The list of UPCs on this Planogram"
+    },
+    {
+      "name": "DeleteUPCs",
+      "type": {
+        "type": "array",
+        "items": "ItemUPC"
+      },
+      "doc": "The list of UPCs being deleted from this Modular"
+    }
+  ]
+}
