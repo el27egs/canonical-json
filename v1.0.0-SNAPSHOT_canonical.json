@@ -1,4 +1,5 @@
 {
+    "doc": "Model representing a Planogram UPC event",
     "fields": [
         {
             "default": null,
@@ -9,16 +10,21 @@
                 {
                     "fields": [
                         {
+                            "default": null,
                             "doc": "Identifies the source of the event.",
                             "name": "Source",
-                            "type": {
-                                "avro.java.string": "String",
-                                "type": "string"
-                            }
+                            "type": [
+                                "null",
+                                {
+                                    "avro.java.string": "String",
+                                    "type": "string"
+                                }
+                            ]
                         },
                         {
                             "default": null,
                             "doc": "The timestamp of the event occurrence; (in milliseconds since Unix epoch).",
+                            "logicalType": "timestamp-millis",
                             "name": "MessageGeneratedTimestamp",
                             "type": [
                                 "null",
@@ -89,39 +95,19 @@
             }
         },
         {
-            "default": null,
             "doc": "The effective date of the Planogram (in milliseconds since Unix epoch)",
             "name": "EffectiveDate",
             "type": [
-                "null",
-                "long"
+                "long",
+                "null"
             ]
         },
         {
-            "default": null,
             "doc": "The discontinue date of the Planogram (in milliseconds since Unix epoch)",
             "name": "DiscontinueDate",
             "type": [
-                "null",
-                "long"
-            ]
-        },
-        {
-            "default": null,
-            "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)",
-            "name": "ItemSelectionDate",
-            "type": [
-                "null",
-                "long"
-            ]
-        },
-        {
-            "default": null,
-            "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)",
-            "name": "ItemDiscontinueDate",
-            "type": [
-                "null",
-                "long"
+                "long",
+                "null"
             ]
         },
         {
@@ -138,6 +124,7 @@
                 "null",
                 {
                     "items": {
+                        "doc": "Model representing the modular segments of a Planogram",
                         "fields": [
                             {
                                 "default": null,
@@ -169,10 +156,27 @@
             ]
         },
         {
+            "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)",
+            "name": "ItemSelectionDate",
+            "type": [
+                "long",
+                "null"
+            ]
+        },
+        {
+            "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)",
+            "name": "ItemDiscontinueDate",
+            "type": [
+                "long",
+                "null"
+            ]
+        },
+        {
             "doc": "The list of UPCs on this Planogram",
             "name": "UPCs",
             "type": {
                 "items": {
+                    "doc": "Model representing an item UPC on a Planogram",
                     "fields": [
                         {
                             "doc": "The UPC of this item",
@@ -217,7 +221,7 @@
                         },
                         {
                             "default": 0,
-                            "doc": "Merchandise style of the product, Tray, Case, Unit",
+                            "doc": "Merchandise style of the product, 0 = Unit, 1 = Tray, 2 = Case, 3 = Display 4 = Alternate, 5 = Loose, 6 = LogStack",
                             "name": "MerchandiseStyleCode",
                             "type": "int"
                         },
