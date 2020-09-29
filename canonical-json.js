@@ -1,4 +1,4 @@
-#!/usr/bin/env nodejs
+#!/usr/bin/env node
 // adapted from https://gist.github.com/kristopherjohnson/5065599
 
 var stdin = process.stdin,
