@@ -2,6 +2,7 @@
   "type": "record",
   "name": "ModularUPCEvent",
   "namespace": "ModularUPCEvents.Resources",
+  "doc": "Model representing a Planogram UPC event",
   "fields": [
     {
       "name": "MetaData",
@@ -13,11 +14,15 @@
           "fields": [
             {
               "name": "Source",
-              "type": {
-                "type": "string",
-                "avro.java.string": "String"
-              },
-              "doc": "Identifies the source of the event."
+              "type": [
+                "null",
+                {
+                  "type": "string",
+                  "avro.java.string": "String"
+                }
+              ],
+              "doc": "Identifies the source of the event.",
+              "default": null
             },
             {
               "name": "MessageGeneratedTimestamp",
@@ -26,7 +31,8 @@
                 "long"
               ],
               "doc": "The timestamp of the event occurrence; (in milliseconds since Unix epoch).",
-              "default": null
+              "default": null,
+              "logicalType": "timestamp-millis"
             }
           ]
         }
@@ -94,38 +100,18 @@
     {
       "name": "EffectiveDate",
       "type": [
-        "null",
-        "long"
+        "long",
+        "null"
       ],
-      "doc": "The effective date of the Planogram (in milliseconds since Unix epoch)",
-      "default": null
+      "doc": "The effective date of the Planogram (in milliseconds since Unix epoch)"
     },
     {
       "name": "DiscontinueDate",
       "type": [
-        "null",
-        "long"
+        "long",
+        "null"
       ],
-      "doc": "The discontinue date of the Planogram (in milliseconds since Unix epoch)",
-      "default": null
-    },
-    {
-      "name": "ItemSelectionDate",
-      "type": [
-        "null",
-        "long"
-      ],
-      "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)",
-      "default": null
-    },
-    {
-      "name": "ItemDiscontinueDate",
-      "type": [
-        "null",
-        "long"
-      ],
-      "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)",
-      "default": null
+      "doc": "The discontinue date of the Planogram (in milliseconds since Unix epoch)"
     },
     {
       "name": "Multiplier",
@@ -142,6 +128,7 @@
           "items": {
             "type": "record",
             "name": "ModularSegment",
+            "doc": "Model representing the modular segments of a Planogram",
             "fields": [
               {
                 "name": "SegmentNumber",
@@ -172,12 +159,29 @@
       "default": null
     },
     {
+      "name": "ItemSelectionDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
+      "name": "ItemDiscontinueDate",
+      "type": [
+        "long",
+        "null"
+      ],
+      "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)"
+    },
+    {
       "name": "UPCs",
       "type": {
         "type": "array",
         "items": {
           "type": "record",
           "name": "ItemUPC",
+          "doc": "Model representing an item UPC on a Planogram",
           "fields": [
             {
               "name": "UPC",
@@ -223,7 +227,7 @@
             {
               "name": "MerchandiseStyleCode",
               "type": "int",
-              "doc": "Merchandise style of the product, Tray, Case, Unit",
+              "doc": "Merchandise style of the product, 0 = Unit, 1 = Tray, 2 = Case, 3 = Display 4 = Alternate, 5 = Loose, 6 = LogStack",
               "default": 0
             },
             {
@@ -294,22 +298,17 @@
             },
             {
               "name": "ShelfNumber",
-              "type": [
-                "null",
-                "int"
-              ],
               "doc": "Shelf number from the bottom of the modular",
+              "type": [ "null", "int" ],
               "default": null
             },
             {
               "name": "PositionOnShelf",
-              "type": [
-                "null",
-                "int"
-              ],
               "doc": "Item position on the shelf from the left",
+              "type": [ "null", "int" ],
               "default": null
             }
+
           ]
         }
       },
