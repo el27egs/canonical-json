@@ -308,7 +308,6 @@
               "type": [ "null", "int" ],
               "default": null
             }
-
           ]
         }
       },

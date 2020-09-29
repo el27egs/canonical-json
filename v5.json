@@ -1,0 +1,306 @@
+{
+  "type": "record",
+  "name": "ModularUPCEvent",
+  "namespace": "ModularUPCEvents.Resources",
+  "fields": [
+    {
+      "name": "MetaData",
+      "doc": "Message source and timestamp",
+      "default": null,
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "EventMetaData",
+          "namespace": "ModularUPCEvents.Resources",
+          "fields": [
+            {
+              "name": "Source",
+              "doc": "Identifies the source of the event.",
+              "type": "string"
+            },
+            {
+              "name": "MessageGeneratedTimestamp",
+              "doc": "The timestamp of the event occurrence; (in milliseconds since Unix epoch).",
+              "default": null,
+              "type": [
+                "null",
+                "long"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CkbPlanogramId",
+      "doc": "The Id of the Planogram in the CKB database",
+      "type": "int"
+    },
+    {
+      "name": "LegacyModPlanId",
+      "doc": "The Id of the Planogram from the legacy system",
+      "type": "int"
+    },
+    {
+      "name": "PlanogramName",
+      "doc": "The name of the Planogram",
+      "default": null,
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    {
+      "name": "CountryCode",
+      "doc": "The Code for the Country of the Planogram",
+      "type": "string"
+    },
+    {
+      "name": "InitialLoad",
+      "doc": "Whether or not this event is part of an Initial Load of data",
+      "default": false,
+      "type": "boolean"
+    },
+    {
+      "name": "StoreNumber",
+      "doc": "The store number of this Planogram",
+      "type": "int"
+    },
+    {
+      "name": "Department",
+      "doc": "The Department of the Planogram (Padded to 2 digits)",
+      "type": "string"
+    },
+    {
+      "name": "Category",
+      "doc": "The Category of the Planogram (Padded to 4 digits)",
+      "type": "string"
+    },
+    {
+      "name": "EffectiveDate",
+      "doc": "The effective date of the Planogram (in milliseconds since Unix epoch)",
+      "default": null,
+      "type": [
+        "null",
+        "long"
+      ]
+    },
+    {
+      "name": "DiscontinueDate",
+      "doc": "The discontinue date of the Planogram (in milliseconds since Unix epoch)",
+      "default": null,
+      "type": [
+        "null",
+        "long"
+      ]
+    },
+    {
+      "name": "ItemSelectionDate",
+      "doc": "The item selection date of the Planogram (in milliseconds since Unix epoch)",
+      "default": null,
+      "type": [
+        "null",
+        "long"
+      ]
+    },
+    {
+      "name": "ItemDiscontinueDate",
+      "doc": "The item discontinue date of the Planogram (in milliseconds since Unix epoch)",
+      "default": null,
+      "type": [
+        "null",
+        "long"
+      ]
+    },
+    {
+      "name": "Multiplier",
+      "doc": "The number of times modular is replicated on the store floorplan",
+      "default": 1,
+      "type": "int"
+    },
+    {
+      "name": "ModularSegments",
+      "doc": "The segments of the modular",
+      "default": null,
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "ModularSegment",
+            "namespace": "ModularUPCEvents.Resources",
+            "fields": [
+              {
+                "name": "SegmentNumber",
+                "doc": "Order number of the section on a modular",
+                "default": null,
+                "type": [
+                  "null",
+                  "int"
+                ]
+              },
+              {
+                "name": "ROCFixtureType",
+                "doc": "ROC fixture type of the segment",
+                "default": null,
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "UPCs",
+      "doc": "The list of UPCs on this Planogram",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "ItemUPC",
+          "namespace": "ModularUPCEvents.Resources",
+          "fields": [
+            {
+              "name": "UPC",
+              "doc": "The UPC of this item",
+              "type": "string"
+            },
+            {
+              "name": "ResolvedUPC",
+              "doc": "The store specific item UPC",
+              "default": null,
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            {
+              "name": "LocationId",
+              "doc": "The Location Id of the item",
+              "type": "int"
+            },
+            {
+              "name": "SectionNumber",
+              "doc": "The section of the item",
+              "type": "int"
+            },
+            {
+              "name": "NewUPC",
+              "doc": "Flag indicating whether this is a newly added item or an already existing item on this planogram",
+              "type": "boolean"
+            },
+            {
+              "name": "ShelfCapacity",
+              "doc": "Product capacity for a position",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "MerchandiseStyleCode",
+              "doc": "Merchandise style of the product, Tray, Case, Unit",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "XFacings",
+              "doc": "Number of horizontal facings",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "YFacings",
+              "doc": "Number of vertical facings",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "ZFacings",
+              "doc": "Number of depth facings",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "XPosition",
+              "doc": "X position of the product",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "YPosition",
+              "doc": "Y position of the product",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "ZPosition",
+              "doc": "Z position of the product",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "FixtureId",
+              "doc": "Fixture Id",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "FixtureNotch",
+              "doc": "Fixture notch position",
+              "default": 0,
+              "type": "int"
+            },
+            {
+              "name": "FixtureXPosition",
+              "doc": "X position of the fixture",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "FixtureYPosition",
+              "doc": "Y position of the fixture",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "FixtureZPosition",
+              "doc": "Z position of the fixture",
+              "default": 0,
+              "type": "double"
+            },
+            {
+              "name": "ShelfNumber",
+              "doc": "Shelf number from the bottom of the modular",
+              "default": null,
+              "type": [
+                "null",
+                "int"
+              ]
+            },
+            {
+              "name": "PositionOnShelf",
+              "doc": "Item position on the shelf from the left",
+              "default": null,
+              "type": [
+                "null",
+                "int"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "DeleteUPCs",
+      "doc": "The list of UPCs being deleted from this Modular",
+      "type": {
+        "type": "array",
+        "items": "ItemUPC"
+      }
+    }
+  ]
+}
